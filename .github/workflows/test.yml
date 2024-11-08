@@ -7,24 +7,18 @@ on:
 jobs:
   lint:
     name: Lint check
-    runs-on: macOS-10.15
+    runs-on: macOS-14
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - run: pod lib lint
       - run: swiftlint --strict
 
   test_on_macOS:
     name: Build and Test on macOS
-    strategy:
-      matrix:
-        xcode-version:
-          - /Applications/Xcode_11.4.1.app
-          - /Applications/Xcode_12.3.app
-          - /Applications/Xcode_12.4.app
-    runs-on: macOS-10.15
+    runs-on: macOS-14
     steps:
-      - uses: actions/checkout@v2
-      - run: sudo xcode-select -s "${{ matrix.xcode-version }}"
+      - uses: actions/checkout@v4
+      - run: sudo xcode-select -s /Applications/Xcode_15.4.app
       - run: swift --version
       - run: swift test
 
@@ -32,10 +26,10 @@ jobs:
     name: Build and Test on Linux
     strategy:
       matrix:
-        swift-version: ["5.2", "5.3", "5.4"]
-    runs-on: Ubuntu-18.04
+        swift-version: ["5.10"]
+    runs-on: Ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Setup swiftenv
         run: |
           git clone https://github.com/kylef/swiftenv.git ~/.swiftenv

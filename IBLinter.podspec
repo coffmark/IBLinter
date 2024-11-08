@@ -7,4 +7,5 @@ Pod::Spec.new do |s|
   s.author         = { 'Yuta Saito' => 'kateinoigakukun@gmail.com' }
   s.source         = { :http => "#{s.homepage}/releases/download/#{s.version}/portable_iblinter.zip" }
   s.preserve_paths = '*'
+  s.osx.deployment_target  = '14.0'
 end
